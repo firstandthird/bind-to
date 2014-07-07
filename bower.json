@@ -1,0 +1,23 @@
+{
+  "name": "bind-to",
+  "description": "simple two way data-binding",
+  "version": "0.0.1",
+  "homepage": "https://github.com/firstandthird/bind-to",
+  "license": "MIT",
+  "copyright": "First+Third",
+  "main": "dist/bind-to.bower.js",
+  "dependencies": {
+    "jquery": "1.*"
+  },
+  "devDependencies": {
+    "assert": "*"
+  },
+  "ignore": [
+    "test",
+    "example",
+    "lib",
+    "Gruntfile.js",
+    "package.json",
+    "grunt"
+  ]
+}
