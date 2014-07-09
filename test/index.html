@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide Tests</title>
+	<link rel="stylesheet" href="../node_modules/grunt-mocha/node_modules/mocha/mocha.css" />
+	<script src="../bower_components/assert/assert.js"></script>
+	<script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js"></script>
+	<!--<script src="../components/blanket/dist/qunit/blanket.min.js" data-cover-adapter="../components/blanket/src/adapters/mocha-blanket.js"></script>-->
+	<script>mocha.setup('tdd')</script>
+</head>
+<body>
+<div id="mocha"></div>
+<div id="fixture" style="visibility: hidden"></div>
+<div id="clone" style="visibility: hidden">
+	<input type="text" id="textInput"/>
+	<input type="checkbox" id="checkboxInput"/>
+	<div id="contentEditable" contenteditable="true"></div>
+	<select id="select">
+		<option value="Test">Test</option>
+		<option value="Foo">Foo</option>
+	</select>
+</div>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../lib/bind-to.js" data-cover></script>
+<script src="bind-to.test.js"></script>
+<script>
+	if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+		mocha.run();
+	}
+</script>
+</body>
+</html>
