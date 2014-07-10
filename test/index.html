@@ -13,13 +13,15 @@
 <div id="mocha"></div>
 <div id="fixture" style="visibility: hidden"></div>
 <div id="clone" style="visibility: hidden">
-	<input type="text" id="textInput"/>
+	<input type="text" id="textInput" value="Test value"/>
 	<input type="checkbox" id="checkboxInput"/>
 	<div id="contentEditable" contenteditable="true"></div>
 	<select id="select">
 		<option value="Test">Test</option>
 		<option value="Foo">Foo</option>
 	</select>
+	<p id="subject"></p>
+	<p id="pWithValue">Bar</p>
 </div>
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../lib/bind-to.js" data-cover></script>

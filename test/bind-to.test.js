@@ -36,17 +36,68 @@ suite('bind-to', function () {
 			assert.equal(typeof bindText.get, 'function');
 			assert.equal(typeof bindText.onChange, 'function');
 		});
-		test('It should grab the initial value by default', function () {
-			
+		test('It should grab the initial value by default', function (done) {
+			$('#subject').bindTo('#fixture #textInput');
+			setTimeout(function () {
+				assert.equal($('#subject').html(), 'Test value');
+				done();
+			}, 10);
+		});
+		test('It should only bind to the element once', function () {
+			var inputText = $('#fixture #textInput').get(0);
+			var anotherBinding = $.bindTo('#fixture #textInput');
+
+			assert.equal($._data(inputText, 'events').keyup.length, 1);
 		});
 	});
 	suite('set', function () {
-
+		test('It should change the value whenever a new value is set', function () {
+			assert.equal(bindText.get(), 'Test value');
+			bindText.set('Foo');
+			assert.equal(bindText.get(), 'Foo');
+		});
+		test('It should fire the change event on the input upon setting a new value', function (done) {
+			$('#fixture #textInput').on('keyup.bindTo', function () {
+				done();
+			});
+			bindText.set('Foo');
+		});
 	});
 	suite('get', function () {
+		test('Get should figure the best method to access the value', function () {
+			var pBind = $.bindTo('#fixture #pWithValue');
 
+			assert.equal(pBind.get(), 'Bar');
+			assert.equal(bindText.get(), 'Test value');
+		});
 	});
 	suite('onChange', function () {
+		test('It should be possible to register to onChange more than once', function (done) {
+			var fired = 0;
 
+			bindText.onChange(function () {
+				fired++;
+			});
+
+			bindText.onChange(function () {
+				fired++;
+
+				assert.equal(fired, 2);
+				done();
+			});
+
+			bindText.set('Foo');
+		});
+		test('It should pass the event, the previous value, and the newvalue while maintaining the scope', function (done) {
+			setTimeout(function () {
+				bindText.onChange(function (e, newValue, oldValue) {
+					assert.equal(e.type, 'keyup');
+					assert.equal(oldValue, 'Test value');
+					assert.equal(newValue, 'Foo');
+					done();
+				});
+				bindText.set('Foo');
+			}, 10);
+		});
 	});
 });
