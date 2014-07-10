@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bind To Playground</title>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>  
+  <script src="../dist/bind-to.js"></script>
+</head>
+<body>
+  <p>Initial p value</p>
+  <input type="text" value=""/>
+  <script>
+    $('p').bindTo('input');
+  </script>
+</body>
+</html>
