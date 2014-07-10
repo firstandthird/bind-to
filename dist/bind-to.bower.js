@@ -1,6 +1,6 @@
 /*!
  * bind-to - simple two way data-binding
- * v0.0.3
+ * v0.0.4
  * https://github.com/firstandthird/bind-to
  * copyright First+Third 2014
  * MIT License
@@ -42,6 +42,9 @@
 					break;
 				case 'SELECT':
 					event = 'change';
+					break;
+				case 'TEXTAREA':
+					event = 'keyup';
 					break;
 				default:
 					if (node.hasAttribute('contenteditable')){
