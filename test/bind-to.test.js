@@ -49,6 +49,23 @@ suite('bind-to', function () {
 
 			assert.equal($._data(inputText, 'events').keyup.length, 1);
 		});
+
+		test('it should support textareas', function(done) {
+			$('#subject').bindTo('#fixture #textareaInput');
+			setTimeout(function () {
+				assert.equal($('#subject').html(), 'Test area value');
+				done();
+			}, 10);
+		});
+
+		test('it should support programiatically changing', function(done) {
+			$('#subject').bindTo('#fixture #textareaInput');
+			$('#fixture #textareaInput').val('testing');
+			setTimeout(function () {
+				assert.equal($('#subject').html(), 'testing');
+				done();
+			}, 10);
+		});
 	});
 	suite('set', function () {
 		test('It should change the value whenever a new value is set', function () {
