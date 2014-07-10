@@ -1,6 +1,6 @@
 /*!
  * bind-to - simple two way data-binding
- * v0.0.1
+ * v0.0.2
  * https://github.com/firstandthird/bind-to
  * copyright First+Third 2014
  * MIT License
@@ -52,7 +52,7 @@
 					}
 			}
 
-			return event;
+			return event + '.bindTo';
 		}
 
 		if (!model.length){
