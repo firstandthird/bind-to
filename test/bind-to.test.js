@@ -66,6 +66,14 @@ suite('bind-to', function () {
 				done();
 			}, 10);
 		});
+
+		test('When the bound element is updated, it should also trigger the appropriate event', function (done) {
+			$('#fixture #textareaInput').on('keyup.bindTo', function () {
+				done();
+			});
+
+			$('#fixture #textareaInput').bindTo('#fixture #textInput');
+		});
 	});
 	suite('set', function () {
 		test('It should change the value whenever a new value is set', function () {
