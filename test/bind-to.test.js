@@ -67,12 +67,14 @@ suite('bind-to', function () {
 			}, 10);
 		});
 
-		test('When the bound element is updated, it should also trigger the appropriate event', function (done) {
-			$('#fixture #textareaInput').on('keyup.bindTo', function () {
-				done();
-			});
+		test('Both elements should be bound to each other', function () {
+			var textInputApi = $('#fixture #textInput').bindTo('#fixture #textareaInput'),
+					textareaApi = $('#fixture #textareaInput').data('bindTo');
 
-			$('#fixture #textareaInput').bindTo('#fixture #textInput');
+			textareaApi.set('Foo');
+			assert.equal(textInputApi.get(), 'Foo');
+			textInputApi.set('Bar');
+			assert.equal(textareaApi.get(), 'Bar');
 		});
 	});
 	suite('set', function () {
@@ -88,6 +90,16 @@ suite('bind-to', function () {
 				done();
 			});
 			bindText.set('Foo');
+		});
+		test('It should not fire the event if the avalue is the same', function () {
+			var bindText = $.bindTo('#fixture #textInput'),
+					calls = 0;
+			$('#fixture #textInput').on('keyup.bindTo', function () {
+				calls++;
+			});
+			bindText.set('Foo');
+			bindText.set('Foo');
+			assert.equal(calls, 1);
 		});
 	});
 	suite('get', function () {
