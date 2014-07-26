@@ -50,7 +50,7 @@ suite('bind-to', function () {
 			assert.equal($._data(inputText, 'events').keyup.length, 1);
 		});
 
-		test('it should support textareas', function(done) {
+		test('It should support textareas', function(done) {
 			$('#subject').bindTo('#fixture #textareaInput');
 			setTimeout(function () {
 				assert.equal($('#subject').html(), 'Test area value');
@@ -58,7 +58,7 @@ suite('bind-to', function () {
 			}, 10);
 		});
 
-		test('it should support programiatically changing', function(done) {
+		test('It should support programmatically changing', function(done) {
 			$('#subject').bindTo('#fixture #textareaInput');
 			$('#fixture #textareaInput').val('testing');
 			setTimeout(function () {
@@ -75,6 +75,13 @@ suite('bind-to', function () {
 			assert.equal(textInputApi.get(), 'Foo');
 			textInputApi.set('Bar');
 			assert.equal(textareaApi.get(), 'Bar');
+    });
+
+		test('It should allow to pass a configuration object instead of a selector', function () {
+			var bindText = $.bindTo({ selector: '#fixture #textInput' }),
+					inputText = $('#fixture #textInput').get(0);
+
+			assert.equal($._data(inputText, 'events').keyup.length, 1);
 		});
 	});
 	suite('set', function () {
@@ -140,6 +147,23 @@ suite('bind-to', function () {
 				});
 				bindText.set('Foo');
 			}, 10);
+		});
+	});
+	suite('Process', function () {
+		test('It should be possible to pass a process function which transforms the value', function () {
+			var called = false;
+			var bindText = $.bindTo({
+				selector: '#fixture #textInput',
+				process: function (value) {
+					called = true;
+					return value + ' bar';
+				}
+			});
+
+			bindText.set('Foo');
+
+			assert.equal(bindText.get(), 'Foo bar');
+			assert.equal(called, true);
 		});
 	});
 });
